@@ -42,7 +42,7 @@
                     <form id="formRisoList" name="formRisoList" method="post" action="#">
                         <table width="400" border="0" cellspacing="0" cellpadding="0" align="center">
                             <tr>
-                                <td width="200"><div align="RIGHT">Бумага</div></td>
+                                <td width="200"><div align="right">Бумага</div></td>
                                 <td>
                                     <select name="Paper" id="Paper">
                                         <option value="woPaper">Заказчика</option>
@@ -58,11 +58,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td width="200"><div align="RIGHT">Количество листов</div></td>
+                                <td width="200"><div align="right">Количество листов</div></td>
                                 <td width="200"><input type="text" name="nList" id="nList" value="1" size="3" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;"></td>
                             </tr>
                             <tr>
-                                <td><div align="RIGHT">Формат</div></td>
+                                <td><div align="right">Формат</div></td>
                                 <td>
                                     <select name="listFormat" id="listFormat">
                                         <option value="A4">A4</option>
@@ -71,18 +71,18 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><div align="RIGHT">Тираж</div></td>
+                                <td><div align="right">Тираж</div></td>
                                 <td><input name="tirazh" type="text" id="tirazh" size="6" maxlength="12" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;" onChange="if(parseInt(value)<50) alert('Слишком маленький тираж');"></td>
                             </tr>
                             <tr>
-                                <td><div align="RIGHT">Сторон</div></td>
+                                <td><div align="right">Сторон</div></td>
                                 <td style="margin-top:10px">
                                     <input name="Storona" type="radio" id="Storona_0" value="1" checked>	Одна 
                                     <input type="radio" name="Storona" value="2" id="Storona_1"> Две
                                 </td>
                             </tr>
                             <tr>
-                                <td><div align="RIGHT">Сумма
+                                <td><div align="right">Сумма
                                         <input name="Result" type="text" id="Result" size="12" maxlength="12" readonly>
                                     </div>
                                 </td>
@@ -100,32 +100,39 @@
                     <form name="formCanonList" method="post" action="#">
                         <table width="400" border="0" align="CENTER" cellpadding="5" cellspacing="0">
                             <tr>
-                                <td width="190" align="RIGHT">Размер изделия (ШхВ), мм</td>
+                                <td width="190" align="right">Размер изделия (ШхВ), мм</td>
                                 <td width="190"><input type="text" name="izdelieA" id="izdelieA" size="3" maxlength="3" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;">
                                     x <input type="text" name="izdelieB" id="izdelieB" size="3" maxlength="3" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;">
                                 </td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Вылет, мм</td>
+                                <td align="right">Вылет, мм</td>
                                 <td>
                                     <input type="text" name="vylet" id="vylet" size="4" maxlength="1" value="0" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;">
                                 </td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Тираж изделий</td>
+                                <td align="right">Тираж изделий</td>
                                 <td><input name="tirazhCanon" type="text" id="tirazhCanon" value="1" size="4" maxlength="4" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;"></td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Формат бумаги</td>
+                                <td align="right">Плоттерная порезка</td>
+                                <td><input type="checkbox" value="0" id="plot_porez" onclick="common.setPlot()"></td>
+                            </tr>
+                            <tr>
+                                <td align="right">Формат бумаги</td>
                                 <td><select name="formatPaperCn" id="formatPaperCn">
                                         <option value="A4">A4 (297x210)</option>
                                         <option value="A3">A3 (420x297)</option>
                                         <option value="A3P">A3+ (450x320)</option>
-                                    </select></td>
+                                        <option value="A3PS" selected class="plot_vid">А3+ (290х400)</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Вид бумаги</td>
-                                <td><select name="vidPaperCn" size="1" id="vidPaperCn">
+                                <td align="right">Вид бумаги</td>
+                                <td>
+                                    <select name="vidPaperCn" size="1" id="vidPaperCn">
                                         <option value="woPaper">Заказчика</option>
                                         <option value="mel150">150 г/м Мелованная</option>
                                         <option value="mel170">170 г/м Мелованная</option>
@@ -133,8 +140,8 @@
                                         <option value="mel250">250 г/м Мелованная</option>
                                         <option value="mel300">300 г/м Мелованная</option>
                                         <option value="mel350">350 г/м Мелованная</option>
-                                        <option value="raf150" selected>Самоклейка Raflatak</option>
-                                        <option value="jac150" selected>Пленка ORACAL</option>
+                                        <option value="raf150" selected class="plot_vid">Самоклейка Raflatak</option>
+                                        <option value="jac150" selected class="plot_vid">Пленка ORACAL</option>
                                         <option value="col90">90 г/м Colotech+</option>
                                         <option value="col100">100 г/м Colotech+</option>
                                         <option value="col120">120 г/м Colotech+</option>
@@ -145,25 +152,29 @@
                                         <option value="col280">280 г/м Colotech+</option>
                                         <option value="col300">300 г/м Colotech+</option>
                                         <option value="chr250">250 г/м ChromoLux</option>
-                                    </select></td>
+                                        <option value="a4">А4 Деструктивная пленка</option>
+                                        <option value="a3">А3 Деструктивная пленка</option>
+                                        <option value="a3p">А3+ Деструктивная пленка</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Цветность</td>
+                                <td align="right">Цветность</td>
                                 <td><select name="colorNum" size="1" id="colorNum">
                                         <option value="44">4+4</option>
-                                        <option value="40">4+0</option>
+                                        <option value="40" selected  class="plot_vid">4+0</option>
                                         <option value="41">4+1</option>
                                         <option value="11">1+1</option>
-                                        <option value="10">1+0</option>
+                                        <option value="10"  class="plot_vid">1+0</option>
                                     </select></td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Изделий на листе</td>
+                                <td align="right">Изделий на листе</td>
                                 <td><input name="izdelieNaList" type="text" id="izdelieNaList" size="4" maxlength="3" readonly>
                                     <input type="BUTTON" name="spuskCalc" id="spuskCalc" value="Разложить" onClick="spuskCanon()"></td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Сумма <input type="text" name="cnResult" id="cnResult" size="12" maxlength="12"></td>
+                                <td align="right">Сумма <input type="text" name="cnResult" id="cnResult" size="12" maxlength="12"></td>
                                 <td><input type="BUTTON" name="calcCanon" id="calcCanon" value="Расчитать" onClick="CanonCalcList()"></td>
                             </tr>
                         </table>
@@ -178,23 +189,23 @@
                     <form name="formCanonList" method="post" action="#">
                         <table width="400" border="0" align="CENTER" cellpadding="5" cellspacing="0">
 <!--                            <tr>
-                                <td width="190" align="RIGHT">Размер изделия (ШхВ), мм</td>
+                                <td width="190" align="right">Размер изделия (ШхВ), мм</td>
                                 <td width="190"><input type="text" name="izdelieA" id="izdelieA" size="3" maxlength="3" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;">
                                     x <input type="text" name="izdelieB" id="izdelieB" size="3" maxlength="3" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;">
                                 </td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Вылет, мм</td>
+                                <td align="right">Вылет, мм</td>
                                 <td>
                                     <input type="text" name="vylet" id="vylet" size="4" maxlength="1" value="0" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;">
                                 </td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Тираж изделий</td>
+                                <td align="right">Тираж изделий</td>
                                 <td><input name="tirazhCanon" type="text" id="tirazhCanon" value="1" size="4" maxlength="4" onKeyPress ="if ((event.keyCode < 48) || (event.keyCode > 57))  event.returnValue = false;"></td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Формат бумаги</td>
+                                <td align="right">Формат бумаги</td>
                                 <td><select name="formatPaperCn" id="formatPaperCn">
                                         <option value="A4">A4 (297x210)</option>
                                         <option value="A3">A3 (420x297)</option>
@@ -202,7 +213,7 @@
                                     </select></td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Вид бумаги</td>
+                                <td align="right">Вид бумаги</td>
                                 <td><select name="vidPaperCn" size="1" id="vidPaperCn">
                                         <option value="woPaper">Заказчика</option>
                                         <option value="mel150">150 г/м Мелованная</option>
@@ -226,7 +237,7 @@
                                     </select></td>
                             </tr>-->
                             <tr>
-                                <td align="RIGHT">Цветность</td>
+                                <td align="right">Цветность</td>
                                 <td><select name="colorNum" size="1" id="colorNum">
                                         <option value="44">4+4</option>
                                         <option value="40">4+0</option>
@@ -236,12 +247,12 @@
                                     </select></td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Изделий на листе</td>
+                                <td align="right">Изделий на листе</td>
                                 <td><input name="izdelieNaList" type="text" id="izdelieNaList" size="4" maxlength="3" readonly>
                                     <input type="BUTTON" name="spuskCalc" id="spuskCalc" value="Разложить" onClick="spuskCanon()"></td>
                             </tr>
                             <tr>
-                                <td align="RIGHT">Сумма <input type="text" name="cnResult" id="cnResult" size="12" maxlength="12"></td>
+                                <td align="right">Сумма <input type="text" name="cnResult" id="cnResult" size="12" maxlength="12"></td>
                                 <td><input type="BUTTON" name="calcCanon" id="calcCanon" value="Расчитать" onClick="CanonCalcList()"></td>
                             </tr>
                         </table>

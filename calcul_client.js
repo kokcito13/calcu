@@ -63,6 +63,9 @@ paperCenaCanon["col250"]=6.14;
 paperCenaCanon["col280"]=6.47;
 paperCenaCanon["col300"]=8.52;
 paperCenaCanon["chr250"]=24.50;
+paperCenaCanon["a4"]=25;
+paperCenaCanon["a3"]=50;
+paperCenaCanon["a3p"]=50;
 
 /*Прайс на печать на на Konica Minolta 6501*/
 var ottiskCanon = new Array();
@@ -75,6 +78,9 @@ ottiskCanon["A3100"]=5.00;
 ottiskCanon["A3P10"]=10.00;
 ottiskCanon["A3P50"]=7.50;
 ottiskCanon["A3P100"]=3.50;
+ottiskCanon["A3PS10"]=10.00;
+ottiskCanon["A3PS50"]=7.50;
+ottiskCanon["A3PS100"]=3.50;
 
 
 function RisoCalcList() {
@@ -137,13 +143,13 @@ function spuskCanon () {
 
     var aPL, bPL; 		// ширина и длина печатного листа
     var aIZ, bIZ, var1, var2; 		// ширина и длина изделия, варианты раскладки 1 и 2
-    var formCn = document.formCanonList; // ссылка на форму
-    var paperFormat = formCn.formatPaperCn[formCn.formatPaperCn.selectedIndex].value;
+    var formCn = $('#formCanonList'); // ссылка на форму
+    var paperFormat = $('#formatPaperCn option:selected').val();
     var zonaNP = 0; // зона непропечатки принтера
     var izdNaList;
 
-    aIZ = parseInt(formCn.izdelieA.value)+parseInt(formCn.vylet.value)*2;
-    bIZ = parseInt(formCn.izdelieB.value)+parseInt(formCn.vylet.value)*2;
+    aIZ = parseInt($('#izdelieA').val())+parseInt($('#vylet').val())*2;
+    bIZ = parseInt($('#izdelieB').val())+parseInt($('#vylet').val())*2;
 
     switch (paperFormat) {
         case "A4":
@@ -158,13 +164,17 @@ function spuskCanon () {
             aPL = 320-2*zonaNP;
             bPL = 450-2*zonaNP;
             break;
+        case "A3PS":
+            aPL = 290-2*zonaNP;
+            bPL = 400-2*zonaNP;
+            break;
     }
 
     var1 = Math.floor(aPL / aIZ) * Math.floor(bPL / bIZ);
     var2 = Math.floor(aPL / bIZ) * Math.floor(bPL / aIZ);
     izdNaList = (var1>var2) ? var1 : var2;
 
-    formCn.izdelieNaList.value= izdNaList;
+    $('#izdelieNaList').val(izdNaList);
 
     return izdNaList;
 }
@@ -174,12 +184,12 @@ function CanonCalcList () {
 
     var izdNaList = spuskCanon();																// изделий на листе
     var formCn = document.formCanonList;												// ссылка на форму Кэнон
-    var tirazh = parseInt(formCn.tirazhCanon.value);								// тираж изделий
+    var tirazh = parseInt($('#tirazhCanon').val());								// тираж изделий
     var tirazhList = tirazh<izdNaList ? 1 : Math.ceil(tirazh/izdNaList);		
     var cenaPaper=0; 																				// цена бумаги для тиража
-    var forPap = formCn.formatPaperCn[formCn.formatPaperCn.selectedIndex].value;	// фомат бумаги
-    var colorDruk = formCn.colorNum[formCn.colorNum.selectedIndex].value;	// цветность печати
-    var vidPap = formCn.vidPaperCn[formCn.vidPaperCn.selectedIndex].value; 		// вид бумаги из формы
+    var forPap = $('#formatPaperCn option:selected').val();	// фомат бумаги
+    var colorDruk = $('#colorNum option:selected').val();	// цветность печати
+    var vidPap = $('#vidPaperCn option:selected').val();    // вид бумаги из формы
     var cenaOtt = 0; // цена оттиска при тираже
     var cenaTotal = 0;	// общая цена;
 
@@ -191,6 +201,9 @@ function CanonCalcList () {
             cenaPaper = paperCenaCanon[vidPap]/4*tirazhList;
             break;
         case "A3P":
+            cenaPaper = paperCenaCanon[vidPap]/4*tirazhList;
+            break;
+        case "A3PS":
             cenaPaper = paperCenaCanon[vidPap]/4*tirazhList;
             break;
     }
@@ -218,7 +231,11 @@ function CanonCalcList () {
         case "10":
             cenaTotal = cenaOtt*0.8*tirazhList+cenaPaper;
             break;
-    } // switch
+    }
+    
+    if(common.checkedPlot()&&cenaTotal<50){
+        cenaTotal = 50;
+    }
 
-    formCn.cnResult.value = cenaTotal;
+    $('#cnResult').val(cenaTotal);
 }
